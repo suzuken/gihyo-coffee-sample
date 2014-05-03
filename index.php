@@ -15,7 +15,7 @@ $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\MonologServiceProvider(), [
-    'monolog.logfile' => __DIR__.'/development.log',
+    'monolog.logfile' => '/tmp/development.log',
 ]);
 $app->register(new Silex\Provider\TranslationServiceProvider(), [
     'locale_fallbacks' => ['ja'],
