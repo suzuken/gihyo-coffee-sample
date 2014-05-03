@@ -5,7 +5,7 @@ update:
 	php composer.phar update
 
 init_db:
-	mysql -u root < query/init.q
+	mysql -u root -p < query/init.q
 
 insert:
 	mysql -u coffee -pcoffeepass coffee_db < query/data.q
