@@ -1,1 +1,1 @@
-select * from `coffee_db`.`items`
+select * from `coffee_db`.`item`
