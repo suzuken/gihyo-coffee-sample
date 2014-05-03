@@ -1,0 +1,10 @@
+{% extends "layout.html.twig" %}
+{% block title %}技評コーヒー - ログイン{% endblock %}
+
+{% block body %}
+<h1>ログイン</h1>
+    <form action="/auth" method="post">
+     {{ form_widget(form) }}
+        <input type="submit" name="submit" />
+    </form>
+{% endblock %}

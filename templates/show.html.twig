@@ -1,0 +1,10 @@
+{% extends "layout.html.twig" %}
+{% block title %}技評コーヒー - {{item.name}} のページ{% endblock %}
+
+
+{% block body %}
+    <h1>{{item.name}}</h1>
+    <a href="{{item.photo_href}}" title="{{item.photo_title}}"><img src="{{item.photo_src}}" alt="c\_/"></a>
+    <div class="description">商品説明: {{item.description}}</div>
+    <div class="price">価格: {{item.price}}</div>
+{% endblock %}
