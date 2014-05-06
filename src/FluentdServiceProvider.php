@@ -1,5 +1,5 @@
 <?php
-namespace Acme;
+namespace Gihyo;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;

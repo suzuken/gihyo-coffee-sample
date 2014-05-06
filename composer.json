@@ -10,5 +10,8 @@
         "symfony/config": "~2.3",
         "symfony/translation": "~2.3",
         "fluent/logger": "v0.3.7"
+    },
+    "autoload": {
+        "psr-4": {"Gihyo\\": "src/"}
     }
 }
