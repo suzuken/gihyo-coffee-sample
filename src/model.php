@@ -1,6 +1,6 @@
 <?php
 $app['data.json'] = $app->share(function ($c) {
-    $filename = __DIR__ . '/data/item.json';
+    $filename = __DIR__ . '/../data/item.json';
     return json_decode(fread(fopen($filename, 'r'), filesize($filename)), true);
 });
 
