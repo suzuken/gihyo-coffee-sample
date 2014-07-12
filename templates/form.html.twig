@@ -3,6 +3,7 @@
 
 {% block body %}
 <h1>ログイン</h1>
+    <p>user: guest@example.com, password: passwordでログインできます。</p>
     <form action="/auth" method="post">
      {{ form_widget(form) }}
         <input type="submit" name="submit" />
