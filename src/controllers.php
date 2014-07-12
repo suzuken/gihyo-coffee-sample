@@ -9,7 +9,7 @@ $app->before(function (Request $request) {
 });
 
 $after = function (Request $request, Response $response, Application $app) {
-    $app['fluentd']->post("debug.test", ["hello"=>"world", "server"=>$_SERVER, "session"=>$app['session']->getId()]);
+    $app['fluentd']->post("log.test", ["hello"=>"world", "server"=>$_SERVER, "session"=>$app['session']->getId()]);
 };
 
 $app['template.render'] = $app->protect(function ($path, $params) {
@@ -35,6 +35,7 @@ $app->get('/show/{id}', function ($id, Application $app, Request $request) {
     if (!$item) {
         $app->abort(404);
     }
+    $app['fluentd']->post("log.show_item", ["type"=>"show_item", "server"=>$_SERVER, "session"=>$app['session']->getId()]);
 
     return $app['twig']->render('show.html.twig', ['item' => $item]);
 })
@@ -56,6 +57,8 @@ $app->get('/login', function (Application $app, Request $request) {
         ])
         ->getForm();
 
+    $app['fluentd']->post("log.user_login", ["type"=>"user_login", "server"=>$_SERVER, "session"=>$app['session']->getId()]);
+
     return $app['twig']->render('form.html.twig', ['form' => $form->createView()]);
 })
 ->after($after);
@@ -64,7 +67,7 @@ $app->post('/auth', function (Application $app, Request $request) {
     $email = $request->request->get('form')['email'];
     $password = $request->request->get('form')['password'];
 
-    if ('suzuken326@gmail.com' !== $email || 'password' !== $password) {
+    if ('guest@example.com' !== $email || 'password' !== $password) {
         return $app->redirect('/login');
     }
 
