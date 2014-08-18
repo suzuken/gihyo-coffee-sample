@@ -49,7 +49,7 @@ $app->get('/show/{id}', function ($id, Application $app, Request $request) {
 $app->get('/login', function (Application $app, Request $request) {
     $app['session']->start();
     if ($app['session']->has('user') && $app['session']->has('password')) {
-        return $app->redirect('/');
+        return $app->redirect($request->getBaseUrl());
     }
 
     $form = $app['form.factory']->createBuilder('form')
