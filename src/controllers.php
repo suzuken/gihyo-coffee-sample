@@ -72,18 +72,18 @@ $app->post('/auth', function (Application $app, Request $request) {
     $password = $request->request->get('form')['password'];
 
     if ('guest@example.com' !== $email || 'password' !== $password) {
-        return $app->redirect('/login');
+        return $app->redirect($request->getBaseUrl() . '/login');
     }
 
     $app['session']->set('email', $email);
 
-    return $app->redirect('/');
+    return $app->redirect($request->getBaseUrl());
 });
 
 $app->get('/logout', function (Application $app, Request $request) {
     $app['session']->clear();
 
-    return $app->redirect('/');
+    return $app->redirect($request->getBaseUrl());
 });
 
 $app->error(function (\Exception $e, $code) {
