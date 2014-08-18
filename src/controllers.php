@@ -22,6 +22,10 @@ $app['template.render'] = $app->protect(function ($path, $params) {
 });
 
 $app->get('/', function (Application $app, Request $request) {
+    $paths = explode('/', $request->getBaseUrl());
+    if ($paths[count($paths) - 1] !== 'index.php') {
+        return $app->redirect($request->getBaseUrl() . '/index.php');
+    }
     $items = $app['model.all_items'];
     $render = $app['template.render'];
 
@@ -45,7 +49,7 @@ $app->get('/show/{id}', function ($id, Application $app, Request $request) {
 $app->get('/login', function (Application $app, Request $request) {
     $app['session']->start();
     if ($app['session']->has('user') && $app['session']->has('password')) {
-        return $app->redirect('/');
+        return $app->redirect($request->getBaseUrl());
     }
 
     $form = $app['form.factory']->createBuilder('form')
@@ -68,18 +72,18 @@ $app->post('/auth', function (Application $app, Request $request) {
     $password = $request->request->get('form')['password'];
 
     if ('guest@example.com' !== $email || 'password' !== $password) {
-        return $app->redirect('/login');
+        return $app->redirect($request->getBaseUrl() . '/login');
     }
 
     $app['session']->set('email', $email);
 
-    return $app->redirect('/');
+    return $app->redirect($request->getBaseUrl());
 });
 
 $app->get('/logout', function (Application $app, Request $request) {
     $app['session']->clear();
 
-    return $app->redirect('/');
+    return $app->redirect($request->getBaseUrl());
 });
 
 $app->error(function (\Exception $e, $code) {
