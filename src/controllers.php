@@ -22,6 +22,10 @@ $app['template.render'] = $app->protect(function ($path, $params) {
 });
 
 $app->get('/', function (Application $app, Request $request) {
+    $paths = explode('/', $request->getBaseUrl());
+    if ($paths[count($paths) - 1] !== 'index.php') {
+        return $app->redirect($request->getBaseUrl() . '/index.php');
+    }
     $items = $app['model.all_items'];
     $render = $app['template.render'];
 
